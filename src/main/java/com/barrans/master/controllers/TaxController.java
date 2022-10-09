@@ -48,10 +48,13 @@ public class TaxController implements IAction {
 		return service.getTypes();
 	}
 
+	
+	@POST
+	@Path("/byId")
 	@Override
 	public SimpleResponse entity(Object param) {
 		// TODO Auto-generated method stub
-		return null;
+		return service.entity(param);
 	}
 
 }
