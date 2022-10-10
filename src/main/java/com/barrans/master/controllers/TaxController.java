@@ -24,13 +24,13 @@ public class TaxController implements IAction {
 	@Path("/register")
 	@Override
 	public SimpleResponse insert(Object param, @HeaderParam("x-consumer-id") String header) {
-		// TODO Auto-generated method stub
+		
 		return service.insert(param, header);
 	}
 
 	@Override
 	public SimpleResponse update(Object param, String header) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -38,7 +38,7 @@ public class TaxController implements IAction {
 	@Path("/inquiry")
 	@Override
 	public SimpleResponse inquiry(Object param) {
-		// TODO Auto-generated method stub
+		
 		return service.inquiry(param);
 	}
 
@@ -53,7 +53,7 @@ public class TaxController implements IAction {
 	@Path("/byId")
 	@Override
 	public SimpleResponse entity(Object param) {
-		// TODO Auto-generated method stub
+		
 		return service.entity(param);
 	}
 
