@@ -63,10 +63,14 @@ public class ProvinceController implements IAction{
 	}
 
 	@POST
-	@Path("/entity")
+	@Path("/byId")
 	public SimpleResponse entity(Object param) {
-	
-		return null;
+		try {
+			return service.entity(param);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
+		}
 	}
 
 	@POST

@@ -81,18 +81,24 @@ public class ProvinceService implements IAction{
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, GeneralConstants.UNAUTHORIZED, "");
 			}
 
-			String codeAvailable = requestBody.get("codeAvailable") != null ? requestBody.get("codeAvailable").toString() : null;
+			String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
+			if (id == null) {
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "id can't be null", "");
+			}
+
+			String changeCode = requestBody.get("changeCode") != null ? requestBody.get("changeCode").toString() : null;
 			String changeNameProvince = requestBody.get("changeNameProvince") != null ? requestBody.get("changeNameProvince").toString() : null;
-
-			if (codeAvailable == null){
-				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Code Available can't be null", "");
-			}
 			
-			Province prov = Province.find("code = ?1", codeAvailable).firstResult();
-			if (prov == null){
-				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Code Available Not Found on DB", "");
+			if(changeCode == null || changeNameProvince == null) {
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Change code and change Name Province Can't be null", "");
 			}
 
+			Province prov = Province.findById(id);
+			if (prov == null){
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Not Found", "");
+			}
+
+			prov.setCode(changeCode);
 			prov.setName(changeNameProvince);;
 			ObjectActiveAndCreatedDateUtil.updateObject(prov, userId);
 			prov.persist();
@@ -115,7 +121,7 @@ public class ProvinceService implements IAction{
 
 
 			String listQuery = 
-			"SELECT p.code, p.name FROM master_schema.province p ";
+			"SELECT p.id, p.code, p.name FROM master_schema.province p ";
 
 			Query query = em.createNativeQuery(listQuery.toString());
 
@@ -123,7 +129,7 @@ public class ProvinceService implements IAction{
 			query.setMaxResults(limit);
 
 			List<Object[]> result = query.getResultList();
-			List<Map<String,Object>> data = BasicUtils.createListOfMapFromArray(result, "codeRegion", "nameProvince");
+			List<Map<String,Object>> data = BasicUtils.createListOfMapFromArray(result, "id","codeRegion", "nameProvince");
 			
 			Query qCount = em.createNativeQuery("SELECT count(1) from master_schema.province p");
  
@@ -167,7 +173,30 @@ public class ProvinceService implements IAction{
 		}
 	}
 	public SimpleResponse entity(Object param) {
-		return null;
+		try {
+			ObjectMapper om = new ObjectMapper();
+			Map<String, Object> requestBody = om.convertValue(param, new TypeReference<>(){});
+
+			String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
+
+			if (id == null){
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Id can't be null", "");
+			}
+
+			Province prov = Province.findById(id);
+			if (prov == null){
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Not found", "");
+			}
+			Map<String,Object> result = new HashMap<>();
+			result.put("id", prov.id );
+			result.put("code", prov.getCode());
+			result.put("nameProvince", prov.getName());
+
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, result);
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
+		}
 	}
 
 }
