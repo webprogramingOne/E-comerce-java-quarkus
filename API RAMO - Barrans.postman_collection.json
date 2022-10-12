@@ -1,0 +1,228 @@
+{
+	"info": {
+		"_postman_id": "b5618f70-ae2b-4f05-a636-df98612c1278",
+		"name": "API RAMO - Barrans",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7674933"
+	},
+	"item": [
+		{
+			"name": "Master City",
+			"item": [
+				{
+					"name": "Tes API City",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/tesAPICity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"tesAPICity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"001\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"D\",\r\n    \"name\" : \"bandung\",\r\n    \"initial\" : \"BDG\",\r\n    \"provinceId\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"b0fa35c6-9cf5-498f-8457-21d96fbafbc3\",\r\n    \"code\" : \"AD\",\r\n    \"name\" : \"Kabupaten Klaten\",\r\n    \"initial\" : \"Klt\",\r\n    \"provinceId\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"provinceId\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/inquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"13ef98d3-8957-4b99-92d9-e97f89619b02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/byId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"byId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"6808bb5b-d9a9-49ea-b46a-3385a7de92f7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/city/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
