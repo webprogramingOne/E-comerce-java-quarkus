@@ -45,7 +45,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"code\" : \"D\",\r\n    \"name\" : \"bandung\",\r\n    \"initial\" : \"BDG\",\r\n    \"provinceId\" : \"1\"\r\n}",
+							"raw": "{\r\n    \"code\" : \"AB\",\r\n    \"name\" : \"Jogja\",\r\n    \"initial\" : \"DIY\",\r\n    \"provinceId\" : \"1\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -121,7 +121,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"provinceId\" : \"1\"\r\n}",
+							"raw": "{\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -197,7 +197,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : \"6808bb5b-d9a9-49ea-b46a-3385a7de92f7\"\r\n}",
+							"raw": "{\r\n    \"id\" : \"b8575271-72eb-4629-9ad8-b8bbc3f3a1b9\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -216,6 +216,224 @@
 								"v1",
 								"master",
 								"city",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master District",
+			"item": [
+				{
+					"name": "Tes API District",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/tesAPICity",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"tesAPICity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"001\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"CWS\",\r\n    \"name\" : \"Cawas\",\r\n    \"cityId\" : \"b0fa35c6-9cf5-498f-8457-21d96fbafbc3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"a313071d-264b-491a-adae-5066d17615c3\",\r\n    \"code\" : \"BYT\",\r\n    \"name\" : \"Bayat\",\r\n    \"cityId\" : \"b0fa35c6-9cf5-498f-8457-21d96fbafbc3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/inquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"dc760f0a-558f-4042-9891-98329a48c851\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/byId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"byId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1dc6bff2-4817-43be-bf3c-efe2c67a0ecb\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/district/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
 								"delete"
 							]
 						}

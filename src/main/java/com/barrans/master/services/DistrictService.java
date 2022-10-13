@@ -1,7 +1,7 @@
 package com.barrans.master.services;
 
 import com.barrans.master.models.City;
-import com.barrans.master.models.Province;
+import com.barrans.master.models.District;
 import com.barrans.util.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -17,9 +17,8 @@ import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 @ApplicationScoped
-public class CityService implements IAction {
+public class DistrictService implements IAction {
     private static final Logger LOGGER = LoggerFactory.getLogger(ProvinceService.class.getName());
 
     @Inject
@@ -41,48 +40,41 @@ public class CityService implements IAction {
 
             if (req.get("code") == null
                     || (req.get("code") != null && GeneralConstants.EMPTY_STRING.equals(req.get("code"))))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City code is required", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District code is required", new String());
 
-            if (City.find("code", req.get("code").toString()).firstResult() != null)
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City code already exists", new String());
+            if (District.find("code", req.get("code").toString()).firstResult() != null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District code already exists", new String());
 
             if (req.get("name") == null
                     || (req.get("name") != null && GeneralConstants.EMPTY_STRING.equals(req.get("name"))))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City name is required", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District name is required", new String());
 
-            if (City.find("name", req.get("name").toString()).firstResult() != null)
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City name already exists", new String());
+            if (District.find("name", req.get("name").toString()).firstResult() != null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District name already exists", new String());
 
-            if (req.get("initial") == null
-                    || (req.get("initial") != null && GeneralConstants.EMPTY_STRING.equals(req.get("initial"))))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Initial is required", new String());
+            if (req.get("cityId") == null
+                    || (req.get("cityId") != null && GeneralConstants.EMPTY_STRING.equals(req.get("cityId"))))
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City id is required", new String());
 
-            if (City.find("initial", req.get("initial").toString()).firstResult() != null)
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Initial already exists", new String());
-
-            if (req.get("provinceId") == null
-                    || (req.get("provinceId") != null && GeneralConstants.EMPTY_STRING.equals(req.get("provinceId"))))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Province id is required", new String());
-
-            if (Province.findById(req.get("provinceId").toString()) == null) {
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Province does not exist", new String());
+            if (City.findById(req.get("cityId").toString()) == null) {
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City does not exist", new String());
             }
 
-            City city = new City();
-            city.code = req.get("code").toString();
-            city.name = req.get("name").toString();
-            city.initial = req.get("initial").toString();
-            city.province = Province.findById(req.get("provinceId").toString());
+            District district = new District();
+            district.code = req.get("code").toString();
+            district.name = req.get("name").toString();
+            district.city = City.findById(req.get("cityId").toString());
 
-            ObjectActiveAndCreatedDateUtil.registerObject(city, customId.get("userId").toString());
-            city.persist();
+            ObjectActiveAndCreatedDateUtil.registerObject(district, customId.get("userId").toString());
+            district.persist();
 
-            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "success register " +city.name);
+            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "success register " + district.name);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
         }
     }
+
 
     @SuppressWarnings("unchecked")
     @Override
@@ -93,29 +85,28 @@ public class CityService implements IAction {
             Map<String, Object> req = om.convertValue(param, Map.class);
             Map<String, Object> customId = om.readValue(header, Map.class);
 
-            City city = City.findById(req.get("id").toString());
-            if (city == null)
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City does not exist", new String());
+            District district = District.findById(req.get("id").toString());
+            if (district == null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District does not exist", new String());
 
             if (customId.get("userId") == null
                     || customId.get("userId").toString().equals(GeneralConstants.EMPTY_STRING))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, GeneralConstants.UNAUTHORIZED,
-                        new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, GeneralConstants.UNAUTHORIZED,new String());
 
-            city.code = req.get("code").toString();
-            city.name = req.get("name").toString();
-            city.initial = req.get("initial").toString();
-            city.province = Province.findById(req.get("provinceId").toString());
+            district.code = req.get("code").toString();
+            district.name = req.get("name").toString();
+            district.city = City.findById(req.get("cityId").toString());
 
-            ObjectActiveAndCreatedDateUtil.updateObject(city, customId.get("userId").toString());
-            city.persist();
+            ObjectActiveAndCreatedDateUtil.updateObject(district, customId.get("userId").toString());
+            district.persist();
 
-            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, city);
+            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, district);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
         }
     }
+
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
@@ -126,8 +117,7 @@ public class CityService implements IAction {
 
             String code = req.get("code") == null ? GeneralConstants.EMPTY_STRING : req.get("code").toString();
             String name = req.get("name") == null ? GeneralConstants.EMPTY_STRING : req.get("name").toString();
-            String initial = req.get("initial") == null ? GeneralConstants.EMPTY_STRING : req.get("initial").toString();
-            String province = req.get("provinceId") == null ? GeneralConstants.EMPTY_STRING : req.get("provinceId").toString();
+            String city = req.get("cityId") == null ? GeneralConstants.EMPTY_STRING : req.get("cityId").toString();
 
             Integer limit = 5, offset = 0;
 
@@ -138,7 +128,7 @@ public class CityService implements IAction {
                 offset = Integer.parseInt(req.get("offset").toString());
 
             StringBuilder queryString = new StringBuilder();
-            queryString.append("select id, code, name, initial, province_id from master_schema.city ");
+            queryString.append("select id, code, name, city_id from master_schema.district ");
             queryString.append("where true ");
 
             if (!code.isEmpty())
@@ -147,11 +137,8 @@ public class CityService implements IAction {
             if (!name.isEmpty())
                 queryString.append(" and name ilike :paramName ");
 
-            if (!initial.isEmpty())
-                queryString.append(" and initial ilike :paramInitial ");
-
-            if (!province.isEmpty())
-                queryString.append(" and province_id ilike :paramProvince ");
+            if (!city.isEmpty())
+                queryString.append(" and city_id ilike :paramCity ");
 
             queryString.append(" order by id desc");
 
@@ -163,11 +150,8 @@ public class CityService implements IAction {
             if (!name.isEmpty())
                 query.setParameter("paramName", "%" + name + "%");
 
-            if (!initial.isEmpty())
-                query.setParameter("paramInitial", "%" + initial + "%");
-
-            if (!province.isEmpty())
-                query.setParameter("paramProvince", "%" + province + "%");
+            if (!city.isEmpty())
+                query.setParameter("paramCity", "%" + city + "%");
 
             if (!limit.equals(-99) || !offset.equals(-99)) {
                 query.setFirstResult(offset);
@@ -176,7 +160,7 @@ public class CityService implements IAction {
 
             List<Object[]> list = query.getResultList();
             List<Map<String, Object>> data = BasicUtils.createListOfMapFromArray(list, "id", "code",
-                    "name", "initial", "province_id");
+                    "name", "city_id");
 
             Query qCount = em.createNativeQuery(String.format(queryString.toString()
                     .replaceFirst("select.* from", "select count(*) from ").replaceFirst("order by.*", "")));
@@ -197,6 +181,7 @@ public class CityService implements IAction {
         }
     }
 
+
     @SuppressWarnings("unchecked")
     @Override
     public SimpleResponse entity(Object param) {
@@ -206,10 +191,10 @@ public class CityService implements IAction {
             String id = req.get("id") == null ? GeneralConstants.EMPTY_STRING : req.get("id").toString();
 
             if (id.isEmpty())
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City id is required", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District id is required", new String());
 
             StringBuilder sb = new StringBuilder();
-            sb.append("select id, code, name, initial, province_id from master_schema.city where id =:id");
+            sb.append("select id, code, name, city_id from master_schema.district where id =:id");
 
             Query query = em.createNativeQuery(sb.toString());
             query.setParameter("id", id);
@@ -217,14 +202,13 @@ public class CityService implements IAction {
             List<Object[]> list = query.getResultList();
 
             if (list.isEmpty()){
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City does not exist", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District does not exist", new String());
             }
 
-            List<Map<String, Object>> city = BasicUtils.createListOfMapFromArray(list, "id", "code",
-                    "name", "initial", "province_id");
+            List<Map<String, Object>> district = BasicUtils.createListOfMapFromArray(list, "id", "code",
+                    "name", "district_id");
 
-
-            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, city);
+            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, district);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
@@ -240,15 +224,15 @@ public class CityService implements IAction {
             String id = req.get("id") == null ? GeneralConstants.EMPTY_STRING : req.get("id").toString();
 
             if (id.isEmpty())
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City id is required", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District id is required", new String());
 
-            City city = City.findById(id);
-            if (city == null)
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City does not exist", new String());
+            District district = District.findById(id);
+            if (district == null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "District does not exist", new String());
 
-            City.deleteById(id);
+            District.deleteById(id);
 
-            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "success delete " +city.name);
+            return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "success delete " + district.name);
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
