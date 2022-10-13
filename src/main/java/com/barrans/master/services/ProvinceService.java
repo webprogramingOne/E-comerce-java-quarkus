@@ -153,14 +153,10 @@ public class ProvinceService implements IAction{
 			ObjectMapper om = new ObjectMapper();
 			Map<String, Object> requestBody = om.convertValue(param, new TypeReference<>(){});
 
-			String code = requestBody.get("code") != null ? requestBody.get("code").toString() : null;
-			String province = requestBody.get("province") != null ? requestBody.get("province").toString() : null;
+			String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
+			if (id == null) return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "ID can't be null", "");
 
-			if (code == null && province == null ){
-				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Please Input code or province", "");
-			}
-
-			Province prov = Province.find("code = ?1 OR name = ?2", code, province).firstResult();
+			Province prov = Province.findById(id);
 			if (prov == null){
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Province not found", "");
 			}
@@ -172,6 +168,7 @@ public class ProvinceService implements IAction{
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
 		}
 	}
+	
 	public SimpleResponse entity(Object param) {
 		try {
 			ObjectMapper om = new ObjectMapper();

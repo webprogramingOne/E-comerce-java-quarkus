@@ -336,6 +336,190 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Postal Code",
+			"item": [
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/v1/master/postalCode/inquiry",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : 1}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" :\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/v1/master/postalCode/byId",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"byId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : 1}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"69122\",\r\n    \"idDistrict\": \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/v1/master/postalCode/insert",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : 1}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1\",\r\n    \"code\" : \"12345\",\r\n    \"idDistrict\" : \"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/v1/master/postalCode/update",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : 1}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"id\": \"6422f556-d05e-4fa6-b29c-c03c907f58f0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{host}}/api/v1/master/postalCode/delete",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
