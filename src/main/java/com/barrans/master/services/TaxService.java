@@ -73,7 +73,7 @@ public class TaxService implements IAction {
 	@Transactional
 	@Override
 	public SimpleResponse update(Object param, String header) {
-		// TODO Auto-generated method stub
+		
 		try {
 			ObjectMapper om = new ObjectMapper();
 			Map<String, Object> req = om.convertValue(param, Map.class);
@@ -176,7 +176,7 @@ public class TaxService implements IAction {
 	@SuppressWarnings("unchecked")
 	@Override
 	public SimpleResponse entity(Object param) {
-		// TODO Auto-generated method stub
+		
 		try {
 			ObjectMapper om = new ObjectMapper();
 			Map<String, Object> req = om.convertValue(param, Map.class);

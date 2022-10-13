@@ -35,7 +35,6 @@ public class EmailNotificationHook {
 
 		try {
             JsonNode request = objMapper.readTree(msg);
-			// TODO implement hook handling
 
         } catch (Exception e) {
 			LOGGER.error("Failed to process hook", e);

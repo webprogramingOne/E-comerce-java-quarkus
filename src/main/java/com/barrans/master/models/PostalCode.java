@@ -22,4 +22,23 @@ public class PostalCode extends CommonObjectCreatedDate implements Serializable{
 
     @ManyToOne
     public SubDistrict district;
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public SubDistrict getDistrict() {
+        return this.district;
+    }
+
+    public void setDistrict(SubDistrict district) {
+        this.district = district;
+    }
+
+    public void district(String idDistrict) {
+    }
 }
