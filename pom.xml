@@ -74,11 +74,13 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy</artifactId>
     </dependency>
+    
     <dependency>
       <groupId>com.barrans</groupId>
       <artifactId>util-ms</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -96,6 +98,11 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-quartz</artifactId>
     </dependency>
+      <dependency>
+          <groupId>com.google.code.gson</groupId>
+          <artifactId>gson</artifactId>
+          <version>2.9.1</version>
+      </dependency>
   </dependencies>
   <build>
     <plugins>
