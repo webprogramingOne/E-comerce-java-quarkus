@@ -5,11 +5,16 @@ import com.barrans.util.CommonObjectActiveAndCreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "vendor")
 public class Vendor extends CommonObjectActiveAndCreatedDate implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "code", length = 50, unique=true,nullable=false)
     public String code;
 
@@ -46,9 +51,7 @@ public class Vendor extends CommonObjectActiveAndCreatedDate implements Serializ
     @Column(name = "web")
     public String web;
 
-    @Column(name = "suspended")
-    public boolean suspended;
-
+    // terms
     @Column(name = "term_id")
     public int term_id;
 
@@ -86,23 +89,15 @@ public class Vendor extends CommonObjectActiveAndCreatedDate implements Serializ
     @Column(name = "note",length=1000)
     public String note;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", length = 29)
-    public Date created_at;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "updated_at", length = 29)
-    public Date updated_at;
-
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL )
-    public List<VendorContact> contacts = new ArrayList<VendorContact>();
+    @OneToMany
+    public List<VendorContact> contacts = new ArrayList<>();
 
     @ManyToOne
     public Branch branch;
 
-    public List<VendorContact> getContacts() {
-        return contacts;
-    }
+//    public List<VendorContact> getContacts() {
+//        return contacts;
+//    }
 
 //    public static Page<Vendor> page(int page, int pageSize) {
 //        return find.where().findPagingList(pageSize).getPage(page);

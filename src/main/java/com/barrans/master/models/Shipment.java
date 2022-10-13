@@ -9,6 +9,9 @@ import java.util.Date;
 @Entity
 @Table(name = "shipment")
 public class Shipment extends CommonObjectActiveAndCreatedDate implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "name", length = 150, nullable = false)
     public String name;
 
@@ -20,8 +23,8 @@ public class Shipment extends CommonObjectActiveAndCreatedDate implements Serial
     @Column(name = "updated_at", length = 29)
     public Date updated_at;
 
-    @ManyToOne
-    public Branch branch;
+//    @ManyToOne
+//    public Branch branch;
 
 //    public static Finder<Long, Shipment> find = new Finder<Long, Shipment>(Long.class, Shipment.class);
 //
