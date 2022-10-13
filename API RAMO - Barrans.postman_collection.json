@@ -159,7 +159,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\" : \"13ef98d3-8957-4b99-92d9-e97f89619b02\"\r\n}",
+							"raw": "{\r\n    \"id\" : \"e5707b55-82dd-4514-a881-4c17eec24e53\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -434,6 +434,224 @@
 								"v1",
 								"master",
 								"district",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master Sub District",
+			"item": [
+				{
+					"name": "Tes API Sub District",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/tesAPIsubdistrict",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
+								"tesAPIsubdistrict"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"001\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"GDN\",\r\n    \"name\" : \"Gaden\",\r\n    \"districtId\" : \"8a9132f4-b170-455f-8dff-83c5102ed2f2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"c9c9a887-1353-4e76-b973-aa112b41a613\",\r\n    \"code\" : \"PLR\",\r\n    \"name\" : \"Palar\",\r\n    \"districtId\" : \"8a9132f4-b170-455f-8dff-83c5102ed2f2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/inquiry",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Id",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"c9c9a887-1353-4e76-b973-aa112b41a613\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/byId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
+								"byId"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-consumer-id",
+								"value": "{\"userId\" : \"at_kusuma\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"c9c9a887-1353-4e76-b973-aa112b41a613\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:32650/api/v1/master/subdistrict/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "32650",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subdistrict",
 								"delete"
 							]
 						}
