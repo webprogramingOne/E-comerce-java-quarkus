@@ -43,13 +43,22 @@ public class CityService implements IAction {
                     || (req.get("code") != null && GeneralConstants.EMPTY_STRING.equals(req.get("code"))))
                 return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City code is required", new String());
 
+            if (City.find("code", req.get("code").toString()).firstResult() != null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City code already exists", new String());
+
             if (req.get("name") == null
                     || (req.get("name") != null && GeneralConstants.EMPTY_STRING.equals(req.get("name"))))
                 return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City name is required", new String());
 
+            if (City.find("name", req.get("name").toString()).firstResult() != null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "City name already exists", new String());
+
             if (req.get("initial") == null
                     || (req.get("initial") != null && GeneralConstants.EMPTY_STRING.equals(req.get("initial"))))
-                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Initial city is required", new String());
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Initial is required", new String());
+
+            if (City.find("initial", req.get("initial").toString()).firstResult() != null)
+                return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Initial already exists", new String());
 
             if (req.get("provinceId") == null
                     || (req.get("provinceId") != null && GeneralConstants.EMPTY_STRING.equals(req.get("provinceId"))))
