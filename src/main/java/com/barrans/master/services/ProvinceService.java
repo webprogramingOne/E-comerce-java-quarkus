@@ -31,6 +31,7 @@ public class ProvinceService implements IAction{
 	@Inject
 	EntityManager em;
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public SimpleResponse insert(Object param, String header) {
 		try {
@@ -68,6 +69,7 @@ public class ProvinceService implements IAction{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	public SimpleResponse update(Object param, String header) {
 		try {
@@ -111,6 +113,7 @@ public class ProvinceService implements IAction{
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public SimpleResponse inquiry(Object param) {
 		try {
 			ObjectMapper om = new ObjectMapper();
@@ -156,12 +159,11 @@ public class ProvinceService implements IAction{
 			String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
 			if (id == null) return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "ID can't be null", "");
 
-			Province prov = Province.findById(id);
-			if (prov == null){
+			Province province = Province.findById(id);
+			if (province == null)
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Province not found", "");
-			}
 
-			prov.delete();
+			province.delete();
 			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "");
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
@@ -176,18 +178,18 @@ public class ProvinceService implements IAction{
 
 			String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
 
-			if (id == null){
+			if (id == null)
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Id can't be null", "");
-			}
+			
 
-			Province prov = Province.findById(id);
-			if (prov == null){
+			Province province = Province.findById(id);
+			if (province == null)
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Not found", "");
-			}
+			
 			Map<String,Object> result = new HashMap<>();
-			result.put("id", prov.id );
-			result.put("code", prov.getCode());
-			result.put("nameProvince", prov.getName());
+			result.put("id", province.id );
+			result.put("code", province.getCode());
+			result.put("nameProvince", province.getName());
 
 			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, result);
 		} catch (Exception e) {

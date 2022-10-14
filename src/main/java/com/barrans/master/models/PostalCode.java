@@ -10,8 +10,13 @@ import javax.validation.constraints.NotNull;
 
 import com.barrans.util.CommonObjectCreatedDate;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name="postal_code")
+@Setter
+@Getter
 public class PostalCode extends CommonObjectCreatedDate implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -23,22 +28,4 @@ public class PostalCode extends CommonObjectCreatedDate implements Serializable{
     @ManyToOne
     public SubDistrict district;
 
-    public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public SubDistrict getDistrict() {
-        return this.district;
-    }
-
-    public void setDistrict(SubDistrict district) {
-        this.district = district;
-    }
-
-    public void district(String idDistrict) {
-    }
 }

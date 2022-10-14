@@ -28,7 +28,7 @@ public class UserServiceInterface {
 	
 	ObjectMapper objMapper = new ObjectMapper();
 	
-	// get backoffice user in certain branch_id - 
+	@SuppressWarnings("unchecked")
 	public List<BackofficeContactInfo> getBackofficeContactList(long branchId, String role) throws Exception {
 		HashMap<String,Object> req = new HashMap<>();
 		req.put("branchId", branchId);
