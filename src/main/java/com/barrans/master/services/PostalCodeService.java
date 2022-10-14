@@ -14,8 +14,6 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
-import com.barrans.master.models.District;
 import com.barrans.master.models.PostalCode;
 import com.barrans.master.models.SubDistrict;
 import com.barrans.util.BasicUtils;
@@ -25,8 +23,6 @@ import com.barrans.util.SimpleResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import io.netty.handler.codec.serialization.ObjectEncoder;
-
 @ApplicationScoped
 public class PostalCodeService {
 
@@ -35,7 +31,8 @@ public class PostalCodeService {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(PostalCodeService.class.getName());
 
-    public SimpleResponse inquiry (Object param){
+    @SuppressWarnings("unchecked")
+	public SimpleResponse inquiry (Object param){
         try {
             ObjectMapper om = new ObjectMapper();
             Map<String, Object> requestBody = om.convertValue(param, new TypeReference<>() {});
@@ -91,7 +88,8 @@ public class PostalCodeService {
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
         }
     }
-    @Transactional
+    @SuppressWarnings("unchecked")
+	@Transactional
     public SimpleResponse insert (Object param, String header){
         try {
             ObjectMapper om = new ObjectMapper();
@@ -130,7 +128,8 @@ public class PostalCodeService {
             return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
         }
     }
-    @Transactional
+    @SuppressWarnings({ "unchecked", "static-access" })
+	@Transactional
     public SimpleResponse update (Object param, String header){
         try {
             ObjectMapper om = new ObjectMapper();
@@ -169,12 +168,12 @@ public class PostalCodeService {
         }
     }
 
-    @Transactional
+    @SuppressWarnings("unchecked")
+	@Transactional
     public SimpleResponse delete (Object param, String header){
         try {
             ObjectMapper om = new ObjectMapper();
             Map<String, Object> requestBody = om.convertValue(param, Map.class);
-            Map<String, Object> head = om.readValue(header, Map.class);
 
             String id = requestBody.get("id") != null ? requestBody.get("id").toString() : null;
             if (id == null) return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "id can't be null","");

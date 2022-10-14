@@ -1,6 +1,5 @@
 package com.barrans.master.services;
 
-import com.barrans.master.models.City;
 import com.barrans.master.models.District;
 import com.barrans.master.models.SubDistrict;
 import com.barrans.util.*;

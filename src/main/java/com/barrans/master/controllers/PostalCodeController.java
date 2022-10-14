@@ -11,9 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.barrans.master.models.PostalCode;
 import com.barrans.master.services.PostalCodeService;
-import com.barrans.master.services.ProvinceService;
 import com.barrans.util.GeneralConstants;
 import com.barrans.util.SimpleResponse;
 

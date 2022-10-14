@@ -5,12 +5,15 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import com.barrans.util.CommonObjectCreatedDate;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
 @Table(name="province")
+@Setter
+@Getter
 public class Province extends CommonObjectCreatedDate implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -21,23 +24,5 @@ public class Province extends CommonObjectCreatedDate implements Serializable{
     @Column(name = "name", length = 50, nullable = false)
     @NotNull(message = "Please provide a province name")
     public String name;
-    
   
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
 }
