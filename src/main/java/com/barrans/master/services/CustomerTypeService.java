@@ -1,19 +1,9 @@
 package com.barrans.master.services;
 
-import com.barrans.util.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.barrans.util.IAction;
+import com.barrans.util.SimpleResponse;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-
-@ApplicationScoped
-public class DistrictService implements IAction {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ProvinceService.class.getName());
-
-    @Inject
-    EntityManager em;
+public class CustomerTypeService implements IAction{
 
 	@Override
 	public SimpleResponse insert(Object param, String header) {

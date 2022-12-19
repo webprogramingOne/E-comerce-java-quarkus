@@ -7,12 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.barrans.master.services.ProvinceService;
-import com.barrans.util.GeneralConstants;
 import com.barrans.util.IAction;
 import com.barrans.util.SimpleResponse;
 
@@ -26,62 +21,34 @@ public class ProvinceController implements IAction{
 	@Inject
 	ProvinceService service;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(ProvinceController.class.getName());
-
 	@POST
 	@Path("/insert")
 	public SimpleResponse insert(Object param, @HeaderParam("X-Consumer-Custom-ID") String header) {
-		try {
-			return service.insert(param, header);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
-		}
-		
+		return service.insert(param, header);
 	}
 
 	@POST
 	@Path("/update")
 	public SimpleResponse update(Object param, @HeaderParam("X-Consumer-Custom-ID") String header) {
-		try {
-			return service.update(param, header);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
-		}
+		return service.update(param, header);
 	}
 
 	@POST
 	@Path("/inquiry")
 	public SimpleResponse inquiry(Object param) {
-		try {
-			return service.inquiry(param);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
-		}
+		return service.inquiry(param);
 	}
 
 	@POST
-	@Path("/byId")
+	@Path("/entity")
 	public SimpleResponse entity(Object param) {
-		try {
-			return service.entity(param);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
-		}
+		return service.entity(param);
 	}
 
 	@POST
 	@Path("/delete")
 	public SimpleResponse delete(Object param){
-		try {
-			return service.delete(param);
-		} catch (Exception e) {
-			LOGGER.error(e.getMessage());
-			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
-		}
+		return service.delete(param);
 	}
 
 }
