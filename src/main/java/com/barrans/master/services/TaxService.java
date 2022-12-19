@@ -43,26 +43,22 @@ public class TaxService implements IAction {
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, GeneralConstants.UNAUTHORIZED,
 						new String());
 
-			if (req.get("description") == null
-					|| (req.get("description") != null && GeneralConstants.EMPTY_STRING.equals(req.get("description"))))
+			if (req.get("type") == null || req.get("type") != null
+					&& !EnumUtils.isValidEnum(Tax.Type.class, req.get("type").toString()))
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Type is required", new String());
+			
+			Tax tax = om.convertValue(param, Tax.class);
+			
+			if (tax.description == null || GeneralConstants.EMPTY_STRING.equals(tax.description))
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Description is required", new String());
 
-			if (req.get("type") == null
-					|| (req.get("type") != null && !EnumUtils.isValidEnum(Tax.Type.class, req.get("type").toString())))
-				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Type is required", new String());
-
-			if (req.get("rate") == null)
+			if (tax.rate == 0d)
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Rate id is required", new String());
-
-			Tax tax = new Tax();
-			tax.description = req.get("description").toString();
-			tax.type = Tax.Type.valueOf(req.get("type").toString());
-			tax.rate = Double.parseDouble(req.get("rate").toString());
 
 			ObjectActiveAndCreatedDateUtil.registerObject(tax, customId.get("userId").toString());
 			tax.persist();
-
-			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, new String());
+			
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, getTax(tax.id));
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
@@ -79,20 +75,37 @@ public class TaxService implements IAction {
 			Map<String, Object> req = om.convertValue(param, Map.class);
 			Map<String, Object> customId = om.readValue(header, Map.class);
 
-			Tax tax = Tax.findById(req.get("id").toString());
-			if (tax == null)
-				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Tax does not exist", new String());
-
 			if (customId.get("userId") == null
 					|| customId.get("userId").toString().equals(GeneralConstants.EMPTY_STRING))
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, GeneralConstants.UNAUTHORIZED,
 						new String());
 
-			tax.description = req.get("description").toString();
-			tax.type = Tax.Type.valueOf(req.get("type").toString());
-			tax.rate = Double.parseDouble(req.get("rate").toString());
+			String id = req.get("id") == null ? GeneralConstants.EMPTY_STRING : req.get("id").toString();
+			
+			if (id.equals(GeneralConstants.EMPTY_STRING))
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "id is required", new String());
 
-			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, tax);
+			Tax tax = Tax.findById(req.get("id").toString());
+			
+			if (tax == null)
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Tax does not exist", new String());
+
+			if (req.get("description") != null)
+				tax.description = req.get("description").toString();
+			
+    		if(req.get("type") != null) {
+    			if(!EnumUtils.isValidEnum(Tax.Type.class, req.get("type").toString()))
+        			return new SimpleResponse(GeneralConstants.VALIDATION_CODE,"Illegal type", new String());
+    			tax.type = Tax.Type.valueOf(req.get("type").toString());
+    		}
+    		
+			if (req.get("rate") != null)
+				tax.rate = Double.parseDouble(req.get("rate").toString());
+
+			ObjectActiveAndCreatedDateUtil.updateObject(tax, customId.get("userId").toString(), true);
+			tax.persist();
+			
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, getTax(tax.id));
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
@@ -102,15 +115,11 @@ public class TaxService implements IAction {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public SimpleResponse inquiry(Object param) {
+		
 		try {
 			ObjectMapper om = new ObjectMapper();
 			Map<String, Object> req = om.convertValue(param, Map.class);
-
-			String description = req.get("description") == null ? GeneralConstants.EMPTY_STRING
-					: req.get("description").toString();
-			String type = req.get("type") == null ? GeneralConstants.EMPTY_STRING : req.get("type").toString();
-			Double rate = req.get("rate") == null ? 0.0 : Double.parseDouble(req.get("rate").toString());
-
+			boolean filterDescription = false, filterType = false, filterActive = false;
 			Integer limit = 5, offset = 0;
 
 			if (req.containsKey("limit") && null != req.get("limit"))
@@ -120,30 +129,42 @@ public class TaxService implements IAction {
 				offset = Integer.parseInt(req.get("offset").toString());
 
 			StringBuilder queryString = new StringBuilder();
-			queryString.append("select id, is_active, description, rate, \"type\" from master_schema.tax ");
+			queryString.append("select id, ");
+			queryString.append("	is_active, ");
+			queryString.append("	description, ");
+			queryString.append("	rate, ");
+			queryString.append("	\"type\" ");
+			queryString.append("from ");
+			queryString.append("	master_schema.tax ");
 			queryString.append("where true ");
+			
+            if(req.get("description") != null) {
+            	queryString.append(" and description ilike :paramDescription ");
+                filterDescription = true;
+            }
 
-			if (!description.isEmpty())
-				queryString.append(" and description ilike :paramDescription ");
+            if(req.get("type") != null) {
+            	queryString.append(" and \"type\" = :paramType ");
+                filterType = true;
+            }
 
-			if (rate != 0.0)
-				queryString.append(" and rate =:paramRate ");
-
-			if (EnumUtils.isValidEnum(Tax.Type.class, type))
-				queryString.append(" and type =:paramType ");
+            if(req.get("isActive") != null) {
+            	queryString.append(" and is_active = :paramActive ");
+            	filterActive = true;
+            }
 
 			queryString.append(" order by id desc");
 
 			Query query = em.createNativeQuery(queryString.toString());
 
-			if (!description.isEmpty())
-				query.setParameter("paramDescription", "%" + description + "%");
+			if (filterDescription)
+				query.setParameter("paramDescription", "%" + req.get("description").toString() + "%");
 
-			if (rate != 0.0)
-				query.setParameter("paramRate", rate);
-
-			if (EnumUtils.isValidEnum(Tax.Type.class, type))
-				query.setParameter("paramType", Tax.Type.valueOf(type).ordinal());
+			if (filterType)
+				query.setParameter("paramType", Tax.Type.valueOf(req.get("type").toString()).ordinal());
+				
+			if (filterActive)
+				query.setParameter("paramActive", Boolean.parseBoolean(req.get("isActive").toString()));
 
 			if (!limit.equals(-99) || !offset.equals(-99)) {
 				query.setFirstResult(offset);
@@ -151,11 +172,22 @@ public class TaxService implements IAction {
 			}
 
 			List<Object[]> list = query.getResultList();
-			List<Map<String, Object>> data = BasicUtils.createListOfMapFromArray(list, "id", "isActive", "description",
-					"rate", "type");
+			List<Map<String, Object>> data = 
+					BasicUtils.createListOfMapFromArray(
+							list, 
+							"id", 
+							"isActive", 
+							"description",
+							"rate", 
+							"type"
+							);
 
 			Query qCount = em.createNativeQuery(String.format(queryString.toString()
 					.replaceFirst("select.* from", "select count(*) from ").replaceFirst("order by.*", "")));
+
+			for (Map<String, Object> map : data) {
+				map.replace("type", Tax.Type.values()[Integer.valueOf(map.get("type").toString())]);
+			}
 
 			for (Parameter parameter : query.getParameters())
 				qCount.setParameter(parameter.getName(), query.getParameterValue(parameter));
@@ -184,21 +216,44 @@ public class TaxService implements IAction {
 
 			if (id.isEmpty())
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Tax does not exists", new String());
-
-			StringBuilder sb = new StringBuilder();
-			sb.append("select id, is_active, description, rate, \"type\" from master_schema.tax where id =:id");
-
-			Query query = em.createNativeQuery(sb.toString());
-			query.setParameter("id", id);
-
-			Object[] objects = (Object[]) query.getSingleResult();
-			Map<String, Object> tax = BasicUtils.createMapFromArray(objects, "id", "isActive", "description", "rate",
-					"type");
+			
+			Map<String, Object> tax = getTax(id);
 			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, tax);
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
 		}
+	}
+
+	private Map<String, Object> getTax(String id) throws Exception {
+		StringBuilder sb = new StringBuilder();
+		sb.append("select ");
+		sb.append("		id, ");
+		sb.append("		is_active, ");
+		sb.append("		description, ");
+		sb.append("		rate, ");
+		sb.append("		\"type\" ");
+		sb.append("from ");
+		sb.append("		master_schema.tax ");
+		sb.append("where ");
+		sb.append("		id =:id");
+
+		Query query = em.createNativeQuery(sb.toString());
+		query.setParameter("id", id);
+
+		Object[] objects = (Object[]) query.getSingleResult();
+		Map<String, Object> tax = 
+				BasicUtils.createMapFromArray(
+						objects, 
+						"id", 
+						"isActive", 
+						"description", 
+						"rate",
+						"type");
+		
+		tax.replace("type", Tax.Type.values()[Integer.valueOf(tax.get("type").toString())]);
+
+		return tax;
 	}
 
 	public SimpleResponse getTypes() {

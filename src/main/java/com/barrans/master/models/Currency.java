@@ -22,6 +22,7 @@ public class Currency extends CommonObjectActiveAndCreatedDate implements Serial
     
     @Column(name = "inverse_rate")
     public double inverseRate;
+    
     public String country;
     
     @Column(unique = true)

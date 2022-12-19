@@ -1,24 +1,18 @@
 package com.barrans.master.controllers;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import com.barrans.master.services.ChartOfAccountTypeService;
+import com.barrans.util.IAction;
+import com.barrans.util.SimpleResponse;
 
-import com.barrans.master.services.TaxService;
-import com.barrans.util.*;
-
-@Path("/api/v1/master/tax")
+@Path("/api/v1/master/coaType")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-
-public class TaxController implements IAction {
+public class ChartOfAccountTypeController implements IAction {
 	@Inject
-	TaxService service;
+	ChartOfAccountTypeService service;
 
 	@POST
 	@Path("/insert")
@@ -41,15 +35,8 @@ public class TaxController implements IAction {
 		return service.inquiry(param);
 	}
 
-	@GET
-	@Path("/types")
-	public SimpleResponse getTypes() {
-		return service.getTypes();
-	}
-
-	
 	@POST
-	@Path("/entity")
+	@Path("entity")
 	@Override
 	public SimpleResponse entity(Object param) {
 		return service.entity(param);

@@ -1,20 +1,24 @@
 package com.barrans.master.controllers;
 
-import com.barrans.master.services.CityService;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import com.barrans.master.services.CustomerTypeService;
 import com.barrans.util.IAction;
 import com.barrans.util.SimpleResponse;
 
-import javax.inject.Inject;
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-
-@Path("/api/v1/master/city")
+@Path("/api/v1/master/customerType")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class CityController implements IAction {
-
-    @Inject
-    CityService service;
+public class CustomerTypeController implements IAction {
+	
+	@Inject
+	CustomerTypeService service;
 
     @POST
     @Path("/insert")
@@ -42,12 +46,6 @@ public class CityController implements IAction {
     @Override
     public SimpleResponse entity(Object param) {
         return service.entity(param);
-    }
-
-    @POST
-    @Path("/delete")
-    public SimpleResponse delete(Object param) {
-        return service.delete(param);
     }
 
 }
