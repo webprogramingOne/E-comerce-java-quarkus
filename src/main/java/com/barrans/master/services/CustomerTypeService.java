@@ -1,8 +1,12 @@
 package com.barrans.master.services;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import com.barrans.util.IAction;
 import com.barrans.util.SimpleResponse;
 
+
+@ApplicationScoped
 public class CustomerTypeService implements IAction{
 
 	@Override
