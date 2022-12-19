@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: __CI_PROJECT_NAME__
+  labels:
+    app: __CI_PROJECT_NAME__
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: __CI_PROJECT_NAME__
+  type: ClusterIP

@@ -16,7 +16,20 @@
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
 		<quarkus.platform.version>2.13.0.Final</quarkus.platform.version>
 		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
+		<local.repository.folder>${pom.basedir}/libs/</local.repository.folder>
 	</properties>
+	<repositories>
+	  <repository>
+		  <id>local-maven-repo</id>
+		  <url>file:///${local.repository.folder}</url>
+		  <releases>
+			  <enabled>true</enabled>
+		  </releases>
+		  <snapshots>
+			  <enabled>true</enabled>
+		  </snapshots>
+	  </repository>
+	</repositories>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

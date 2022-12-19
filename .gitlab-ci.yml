@@ -1,0 +1,50 @@
+image: docker:stable
+services:
+  - name: docker:dind
+
+stages:
+  - build
+  - deploy
+
+image_build:
+  stage: build
+  before_script:
+  - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+  script:
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF}" .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF}"
+  only:
+    - staging
+
+deploy_staging:
+  stage: deploy
+  image: 
+    name: bitnami/kubectl:1.23
+    entrypoint: [""]
+  environment:
+    name: ramo-stg
+    #url: https://${URL_STAGING}
+  script:
+    - kubectl config get-contexts
+    - kubectl config use-context barrans/ramo/product-ms:ramo-productms-stg
+    - kubectl version
+    - kubectl get pod -A
+    - cd manifest/
+    - |
+      if kubectl get secret -n ramo-stg | grep regcred; then
+          echo "failed to create secret secrets "regcred" already exists"
+          kubectl delete secret regcred -n ramo-stg
+          kubectl create secret docker-registry regcred --docker-server="${CI_REGISTRY}" --docker-username=gitlab-ci-token --docker-password="${CI_JOB_TOKEN}" -n ramo-stg || exit 1
+      else
+         kubectl create secret docker-registry regcred --docker-server="${CI_REGISTRY}" --docker-username=gitlab-ci-token --docker-password="${CI_JOB_TOKEN}" -n ramo-stg || exit 1
+      fi 
+    - sed -i "s/__CI_ENVIRONMENT_SLUG__/${CI_ENVIRONMENT_SLUG}/" deployment.yaml service.yaml
+    - sed -i "s/__CI_PROJECT_NAME__/${CI_PROJECT_NAME}/" deployment.yaml service.yaml
+    - sed -i "s,__IMAGE__:__VERSION__,${CI_REGISTRY_IMAGE}:$CI_BUILD_REF," deployment.yaml
+    - kubectl apply -f deployment.yaml -n ramo-stg
+    - kubectl apply -f service.yaml -n ramo-stg
+    - kubectl rollout status -f deployment.yaml -n ramo-stg
+    #- kubectl get all -n "${KUBE_NAMESPACE}"
+    - kubectl get all -n ramo-stg
+  only:
+    - staging

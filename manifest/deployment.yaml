@@ -1,0 +1,39 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: __CI_PROJECT_NAME__
+spec:
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: __CI_PROJECT_NAME__
+  replicas: 1 
+  template: 
+    metadata:
+      labels:
+        app: __CI_PROJECT_NAME__
+    spec:
+      containers:
+      - name: __CI_PROJECT_NAME__
+        image: __IMAGE__:__VERSION__
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
+        env:
+        - name: JAVA_OPTIONS
+          value: "-Dquarkus.http.host=0.0.0.0 -Djava.util.logging.manager=org.jboss.logmanager.LogManager -Dquarkus.datasource.jdbc.url=jdbc:postgresql://postgres:5432/ramo_db?currentSchema=master_schema -Dquarkus.datasource.password=Password09!"
+        #volumeMounts:
+        #- name: __CI_PROJECT_NAME__-vol
+        #  mountPath:  /usr/share/nginx/html/public/assets
+        #  subPath: assets
+        # 
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred
+      #volumes:
+      #- name: __CI_PROJECT_NAME__-vol
+      #  persistentVolumeClaim:
+      #   claimName: __CI_PROJECT_NAME__-pv-claim
+
+
