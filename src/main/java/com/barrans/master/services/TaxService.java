@@ -48,7 +48,6 @@ public class TaxService implements IAction {
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Type is required", new String());
 			
 			Tax tax = om.convertValue(param, Tax.class);
-			
 			if (tax.description == null || GeneralConstants.EMPTY_STRING.equals(tax.description))
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Description is required", new String());
 

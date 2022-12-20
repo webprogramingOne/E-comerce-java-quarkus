@@ -1,10 +1,9 @@
 package com.barrans.master.services;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import com.barrans.util.IAction;
 import com.barrans.util.SimpleResponse;
 
+import javax.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class CustomerTypeService implements IAction{

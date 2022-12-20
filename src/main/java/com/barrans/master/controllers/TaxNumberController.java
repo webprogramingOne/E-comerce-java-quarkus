@@ -42,4 +42,8 @@ public class TaxNumberController implements IAction {
 		return service.entity(param);
 	}
 
+	@POST
+	@Path("/delete")
+	public  SimpleResponse delete(Object param){return service.delete(param);}
+
 }

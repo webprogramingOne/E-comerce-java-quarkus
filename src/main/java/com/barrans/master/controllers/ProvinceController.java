@@ -47,8 +47,6 @@ public class ProvinceController implements IAction{
 
 	@POST
 	@Path("/delete")
-	public SimpleResponse delete(Object param){
-		return service.delete(param);
-	}
+	public SimpleResponse delete(Object param){return service.delete(param);}
 
 }

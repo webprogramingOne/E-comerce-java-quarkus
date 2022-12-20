@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "4d012893-f915-4953-aee8-d4e791b5c1fa",
+		"_postman_id": "36efe44a-fa60-4d81-b64b-df45dd86588f",
 		"name": "ramo-master-ms",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21774827"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -513,6 +512,178 @@
 								"v1",
 								"master",
 								"postalCode",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tax Number",
+			"item": [
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\":\"irwan\"}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tnFrom\":\"salam\",\r\n    \"tnTo\":\"ade\",\r\n    \"fixed\":\"none\",\r\n    \"companyId\":\"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/insert",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"limit\": 10,\r\n    \"offset\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/inquiry",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"f494ebf9-20fd-496e-bc88-267fcee4692b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/entity",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\":\"irwan\"}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id\": \"b0c53f81-3f66-4135-b7e2-4a6f47a6b0df\",\r\n    \"tnFrom\":\"salam\",\r\n    \"tnTo\":\"irwan\",\r\n    \"fixed\":\"good\",\r\n    \"companyId\":\"5\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"f1dfd214-9120-4f8f-9444-2645607c8095\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
 								"delete"
 							]
 						}
