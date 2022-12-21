@@ -1,5 +1,6 @@
 package com.barrans.master.services;
 
+import com.barrans.master.models.City;
 import com.barrans.master.models.Province;
 import com.barrans.master.models.Tax;
 import com.barrans.master.models.TaxNumber;
@@ -49,10 +50,13 @@ public class TaxNumberService implements IAction {
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Fixed is required", new String());
 			if (taxNumber.companyId == null || GeneralConstants.EMPTY_STRING.equals(taxNumber.companyId))
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "CompanyId is required", new String());
+			TaxNumber companyTM = TaxNumber.find("company_id = ?1", taxNumber.companyId).firstResult();
+			if (companyTM != null)
+				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Company Id already exists", getTN(companyTM.id));
 			ObjectActiveAndCreatedDateUtil.registerObject(taxNumber, customId.get("userId").toString());
 			taxNumber.persist();
 
-			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, (taxNumber.id));
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, getTN(taxNumber.id));
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
@@ -96,7 +100,7 @@ public class TaxNumberService implements IAction {
 			ObjectActiveAndCreatedDateUtil.updateObject(tm, customId.get("userId").toString(), true);
 			tm.persist();
 
-			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, id +" Updated!");
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, getTN(tm.id));
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage(), e);
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), new String());
@@ -235,7 +239,7 @@ public class TaxNumberService implements IAction {
 				return new SimpleResponse(GeneralConstants.VALIDATION_CODE, "Tax Number not found", "");
 
 			taxNumber.delete();
-			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, id+" Deleted!");
+			return new SimpleResponse(GeneralConstants.SUCCESS_CODE, GeneralConstants.SUCCESS, "Company Id "+(taxNumber.companyId)+" Deleted!");
 		} catch (Exception e) {
 			LOGGER.error(e.getMessage());
 			return new SimpleResponse(GeneralConstants.FAIL_CODE, e.getMessage(), "");
