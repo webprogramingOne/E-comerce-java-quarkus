@@ -1,0 +1,1298 @@
+{
+	"info": {
+		"_postman_id": "4825f14f-c2a3-435b-be5c-2e422fb362d5",
+		"name": "ramo-master-ms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "tax",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\" : \"PPN 10 %\",\r\n    \"type\" : \"PPNBM\",\r\n    \"rate\" : 0.2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/tax/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"tax",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\",\r\n    \"description\" : \"PPN 11 %\",\r\n    \"type\" : \"PPNBM\",\r\n    \"rate\" : 0.3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/tax/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"tax",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\" : \"pp\",\r\n    \"isActive\" : true,\r\n    \"type\" : \"PPNBM\",\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/tax/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"tax",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fdd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/tax/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"tax",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/v1/master/tax/types",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"tax",
+								"types"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "currency",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/currency/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"currency",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/currency/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"currency",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/currency/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"currency",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/currency/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"currency",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "province",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"AC\",\r\n    \"name\" : \"Riau\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/province/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"province",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"76ec17fd-46fa-40a7-93e3-61e6ddf58332\",\r\n    \"name\" : \"Sumatera utara\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/province/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"province",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"AA\",\r\n    \"name\" : \"Ac\",\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/province/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"province",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"01e28fd0-c86c-4157-a12b-739e9fc7dada\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/province/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"province",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "city",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"AAE\",\r\n    \"name\" : \"Banda Aceh\",\r\n    \"initial\" : \"AAA\",\r\n    \"province\" : {\r\n        \"id\" : \"01e28fd0-c86c-4157-a12b-739e9fc7dada\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/city/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"043f8ec5-0cd6-49e3-9978-a03b55424407\",\r\n    \"name\" : \"Sigli II\", \r\n    \"initial\" : \"BBB\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/city/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"province\" : {\r\n        \"id\" : \"01e28fd0-c86c-4157-a12b-739e9fc7dada\"\r\n    },\r\n    \"limit\" : 10,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/city/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"3fa92b1e-6d65-4656-b0a6-44588b6ccdae\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/city/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"city",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "district",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/district/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/district/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/district/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/district/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"district",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subDistrict",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/subDistrict/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subDistrict",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/subDistrict/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subDistrict",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/subDistrict/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subDistrict",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/subDistrict/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"subDistrict",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "postalCode",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/postalCode/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/postalCode/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/postalCode/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/postalCode/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "salesman",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/salesman/insert",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"salesman",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\" : \"xxx\"}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"1428141f-8295-4dba-8679-bcd869bbc2e9\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/salesman/update",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"salesman",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"limit\" : 2,\r\n    \"offset\" : 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/salesman/inquiry",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"salesman",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : \"9d46419e-3860-493d-9ed8-ca3fd0e364c3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/v1/master/postalCode/entity",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"postalCode",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tax Number",
+			"item": [
+				{
+					"name": "Insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\":\"irwan\"}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tnFrom\":\"salam\",\r\n    \"tnTo\":\"ade\",\r\n    \"fixed\":\"none\",\r\n    \"companyId\":\"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/insert",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"insert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inquiry",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n    \"limit\": 10,\r\n    \"offset\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/inquiry",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"inquiry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Entity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"f494ebf9-20fd-496e-bc88-267fcee4692b\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/entity",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"entity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Consumer-Custom-ID",
+								"value": "{\"userId\":\"irwan\"}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id\": \"b0c53f81-3f66-4135-b7e2-4a6f47a6b0df\",\r\n    \"tnFrom\":\"salam\",\r\n    \"tnTo\":\"irwan\",\r\n    \"fixed\":\"good\",\r\n    \"companyId\":\"5\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/update",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"f1dfd214-9120-4f8f-9444-2645607c8095\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/master/taxNumber/delete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"master",
+								"taxNumber",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
