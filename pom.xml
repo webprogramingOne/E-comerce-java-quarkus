@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.barrans</groupId>
-	<artifactId>master-ms</artifactId>
+	<artifactId>Sales-Order</artifactId>
 	<version>1.0.0</version>
 	<properties>
 		<compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -121,8 +121,18 @@
 			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>io.quarkus.resteasy.reactive</groupId>
+            <artifactId>resteasy-reactive-common</artifactId>
+            <version>2.13.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.1</version>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 	<build>
 		<plugins>
 			<plugin>
